@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Hearts - Find Your Perfect Match</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            padding: 20px 0;
+            color: white;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #ffe3e3;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffe3e3;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            background: url('/api/placeholder/1200/500') center/cover;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+            color: #ff6b6b;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .success-stories {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .success-slider {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .success-card {
+            flex: 0 0 calc(33.333% - 30px);
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .success-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .success-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .success-content {
+            padding: 25px;
+        }
+        
+        .success-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+        
+        .success-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .testimonial {
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff8e8e, #ff6b6b);
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-btn {
+            background-color: white;
+            color: #ff6b6b;
+        }
+        
+        .cta-btn:hover {
+            background-color: #ffe3e3;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #ff6b6b;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .success-card {
+                flex: 0 0 calc(50% - 30px);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .success-card {
+                flex: 0 0 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Connect<span>Hearts</span></div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#stories">Success Stories</a></li>
+                    <li><a href="#membership">Membership</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Find Your Perfect Match Today</h1>
+            <p>Join thousands of singles who have found meaningful connections on ConnectHearts. Your journey to love starts here.</p>
+            <a href="#signup" class="btn">Sign Up Free</a>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Compatibility Matching</h3>
+                    <p>Our advanced algorithm matches you with people who share your interests, values, and lifestyle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your privacy matters. We maintain the highest standards of security for all your personal information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Real Connections</h3>
+                    <p>Verified profiles and advanced messaging tools help you build genuine relationships.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="success-stories" id="stories">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="success-slider">
+                <div class="success-card">
+                    <div class="success-img">
+                        <img src="xp2.png" alt="Success Couple">
+                    </div>
+                    <div class="success-content">
+                        <h3>Sophia & Michael</h3>
+                        <p>Met on ConnectHearts in June 2023</p>
+                        <div class="testimonial">
+                            "I never thought I'd find someone so perfect for me! Michael and I connected instantly over our love for hiking and photography. We're now planning our wedding!"
+                        </div>
+                    </div>
+                </div>
+                <div class="success-card">
+                    <div class="success-img">
+                        <img src="xp1.png" alt="Success Couple">
+                    </div>
+                    <div class="success-content">
+                        <h3>Emma & David</h3>
+                        <p>Met on ConnectHearts in September 2023</p>
+                        <div class="testimonial">
+                            "After months of disappointing dates, ConnectHearts matched me with David. His profile stood out immediately, and we've been inseparable since our first coffee date!"
+                        </div>
+                    </div>
+                </div>
+                <div class="success-card">
+                    <div class="success-img">
+                        <img src="xp2.png" alt="Success Couple">
+                    </div>
+                    <div class="success-content">
+                        <h3>Jessica & Thomas</h3>
+                        <p>Met on ConnectHearts in January 2024</p>
+                        <div class="testimonial">
+                            "I was skeptical about online dating until my friend convinced me to try ConnectHearts. Three months later, I met Thomas, and it was like we had known each other forever."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta" id="signup">
+        <div class="container">
+            <h2>Ready to Find Your Match?</h2>
+            <p>Join thousands of singles already on ConnectHearts. Create your profile in minutes and start your journey to finding love.</p>
+            <a href="#" class="btn cta-btn">Sign Up Now</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ConnectHearts</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column" id="membership">
+                    <h3>Membership</h3>
+                    <ul>
+                        <li><a href="#">Free Account</a></li>
+                        <li><a href="#">Premium Features</a></li>
+                        <li><a href="#">Subscription Plans</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help & Support</h3>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Dating Tips</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column" id="contact">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ConnectHearts. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
